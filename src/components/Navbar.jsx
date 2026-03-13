@@ -1,0 +1,79 @@
+import { AiOutlineHome } from "react-icons/ai";
+import { BiFoodMenu } from "react-icons/bi";
+import { GiChefToque, GiShoppingCart } from "react-icons/gi";
+import { GrMenu } from "react-icons/gr";
+import { LiaQuestionSolid } from "react-icons/lia";
+import { LuPhoneCall } from "react-icons/lu";
+import { Link } from "react-router";
+import ThemeSelector from "./ThemeSelector";
+import { useContext } from "react";
+import { cartContext } from "../context/CartContext";
+import LoginModal from "./LoginModal";
+
+const NavItems = ({ links }) =>
+  links.map((link) => (
+    <li key={link.name}>
+      <Link to={link.to}>
+        {link.icon} {link.name}
+      </Link>
+    </li>
+  ));
+
+const Navbar = () => {
+  const { useCart } = useContext(cartContext);
+
+  const navLinks = [
+    { name: "Home", to: "/", icon: <AiOutlineHome size={20} /> },
+    { name: "Menu", to: "/menu", icon: <BiFoodMenu size={20} /> },
+    { name: "About", to: "/about", icon: <LiaQuestionSolid size={20} /> },
+    { name: "Contact", to: "/contact", icon: <LuPhoneCall size={20} /> },
+  ];
+
+  const { totalItems } = useCart();
+  return (
+    <div className="navbar bg-base-100 shadow-sm">
+      <div className="navbar-start">
+        <div className="dropdown">
+          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <GrMenu size={20} />
+          </div>
+          <ul
+            tabIndex={-1}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow gap-3"
+          >
+            <NavItems links={navLinks} />
+          </ul>
+        </div>
+        <Link to={"/"} className="group">
+          <span className="btn btn-ghost text-xl">
+            <GiChefToque
+              size={30}
+              className="transition-all group-hover:rotate-12 "
+            />
+            FoodShop
+          </span>
+        </Link>
+      </div>
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1">
+          <NavItems links={navLinks} />
+        </ul>
+      </div>
+      <div className="navbar-end">
+        <div className="pr-8">
+          <div className="indicator">
+            <Link to={"/cart"} className="btn btn-ghost">
+              <span className="indicator-item badge badge-sm badge-primary">
+                {totalItems > 0 ? totalItems : "Empty"}
+              </span>
+              {<GiShoppingCart size={25} />}
+            </Link>
+          </div>
+        </div>
+        <ThemeSelector />
+        <LoginModal />
+      </div>
+    </div>
+  );
+};
+export default Navbar;
