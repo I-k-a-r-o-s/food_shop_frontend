@@ -21,7 +21,7 @@ const Home = () => {
           </p>
           <form onSubmit={handleSearch}>
             <div className="join">
-              <label className="input join-item" data-theme="light">
+              <label className="input join-item">
                 <IoSearchOutline size={20} />
                 <input
                   type="search"
