@@ -71,7 +71,7 @@ const Navbar = () => {
           </div>
         </div>
         <ThemeSelector />
-        <LoginModal />
+        <LoginModal />        
       </div>
     </div>
   );
