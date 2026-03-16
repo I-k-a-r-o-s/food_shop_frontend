@@ -12,6 +12,7 @@ const App = () => {
     <div>
       <Toaster position="bottom-center" reverseOrder={false} />
       <Navbar />
+      <div className="h-16" aria-hidden="true" />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
