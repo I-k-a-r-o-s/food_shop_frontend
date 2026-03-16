@@ -6,6 +6,7 @@ import Contact from "./pages/Contact";
 import Menu from "./pages/Menu";
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
+import Register from "./pages/Register";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/menu" element={<Menu />} />
+        <Route path="/register" element={<Register/>} />
       </Routes>
     </div>
   );
