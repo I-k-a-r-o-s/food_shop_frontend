@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Register = () => {
@@ -13,8 +14,11 @@ const Register = () => {
     e.preventDefault();
     try {
       console.log(formData);
+      toast.success("Registered! Please Login");
+      //navigate to home
     } catch (error) {
-        console.log("Error",error)
+      toast.error("Error!");
+      console.log("Error", error);
     }
   };
 
