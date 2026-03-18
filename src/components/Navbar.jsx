@@ -6,21 +6,13 @@ import { LiaQuestionSolid } from "react-icons/lia";
 import { LuPhoneCall } from "react-icons/lu";
 import { Link } from "react-router";
 import ThemeSelector from "./ThemeSelector";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { cartContext } from "../context/CartContext";
 import LoginModal from "./LoginModal";
 
-const NavItems = ({ links }) =>
-  links.map((link) => (
-    <li key={link.name}>
-      <Link to={link.to}>
-        {link.icon} {link.name}
-      </Link>
-    </li>
-  ));
-
 const Navbar = () => {
   const { useCart } = useContext(cartContext);
+  const [currentPage, setCurrentPage] = useState("Home");
 
   const navLinks = [
     { name: "Home", to: "/", icon: <AiOutlineHome size={20} /> },
@@ -28,7 +20,22 @@ const Navbar = () => {
     { name: "About", to: "/about", icon: <LiaQuestionSolid size={20} /> },
     { name: "Contact", to: "/contact", icon: <LuPhoneCall size={20} /> },
   ];
-
+  const NavItems = ({ links }) =>
+    links.map((link) => (
+      <li
+        key={link.name}
+        className={
+          currentPage === link.name
+            ? "underline underline-offset-5 decoration-wavy"
+            : ""
+        }
+        onClick={() => setCurrentPage(link.name)}
+      >
+        <Link to={link.to}>
+          {link.icon} {link.name}
+        </Link>
+      </li>
+    ));
   const { totalItems } = useCart();
   return (
     <div className="navbar fixed top-0 left-0 right-0 z-50 bg-base-100 bg-opacity-95 shadow-sm backdrop-blur-sm">
@@ -71,7 +78,7 @@ const Navbar = () => {
           </div>
         </div>
         <ThemeSelector />
-        <LoginModal />        
+        <LoginModal />
       </div>
     </div>
   );
