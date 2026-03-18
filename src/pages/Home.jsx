@@ -1,12 +1,14 @@
+import { useState } from "react";
 import Banner from "../components/Banner";
-import SpecialOffer from "../components/SpecialOffer";
+import ExploreMenu from "../components/ExploreMenu";
 
 const Home = () => {
+  const [category, setCategory] = useState("All");
   return (
-    <>
+    <div>
       <Banner />
-      <SpecialOffer />
-    </>
+      <ExploreMenu category={category} setCategory={setCategory} />
+    </div>
   );
 };
 export default Home;
