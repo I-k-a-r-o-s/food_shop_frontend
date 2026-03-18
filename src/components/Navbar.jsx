@@ -7,12 +7,12 @@ import { LuPhoneCall } from "react-icons/lu";
 import { Link } from "react-router";
 import ThemeSelector from "./ThemeSelector";
 import { useContext, useState } from "react";
-import { cartContext } from "../context/CartContext";
+import { appContext} from "../context/AppContext";
 import LoginModal from "./LoginModal";
 
 const Navbar = () => {
-  const { useCart } = useContext(cartContext);
-  const [currentPage, setCurrentPage] = useState("Home");
+  const { useCart } = useContext(appContext);
+  const [currentPage, setCurrentPage] = useState("");
 
   const navLinks = [
     { name: "Home", to: "/", icon: <AiOutlineHome size={20} /> },
