@@ -9,7 +9,7 @@ const Home = () => {
     <div>
       <Banner />
       <ExploreMenu category={category} setCategory={setCategory} />
-      <DisplayFood/>
+      <DisplayFood category={category} />
     </div>
   );
 };
