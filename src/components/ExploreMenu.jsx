@@ -2,13 +2,10 @@ import reactImg from "../assets/react.svg";
 
 const ExploreMenu = ({ category, setCategory }) => {
   const menu_list = [
-    { menu_name: "something1", menu_image: reactImg },
-    { menu_name: "something2", menu_image: reactImg },
-    { menu_name: "something3", menu_image: reactImg },
-    { menu_name: "something4", menu_image: reactImg },
-    { menu_name: "something5", menu_image: reactImg },
-    { menu_name: "something6", menu_image: reactImg },
-    { menu_name: "something7", menu_image: reactImg },
+    { menu_name: "All", menu_image: reactImg },
+    { menu_name: "salad", menu_image: reactImg },
+    { menu_name: "fruit", menu_image: reactImg },
+    { menu_name: "sandwitch", menu_image: reactImg },
   ];
   console.log(category);
   return (
