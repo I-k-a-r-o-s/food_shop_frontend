@@ -17,11 +17,7 @@ const ThemeSelector = () => {
 
   return (
     <div className="dropdown dropdown-end">
-      <div
-        tabIndex={0}
-        role="button"
-        className="btn btn-ghost m-1 rounded-full lg:rounded-none"
-      >
+      <div tabIndex={0} role="button" className="btn btn-ghost m-1 ">
         <p className="hidden lg:block">{themeName(theme)}</p>
         <IoColorPaletteOutline size={25} />
       </div>
