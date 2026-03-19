@@ -7,8 +7,9 @@ import { LuPhoneCall } from "react-icons/lu";
 import { Link } from "react-router";
 import ThemeSelector from "./ThemeSelector";
 import { useContext, useState } from "react";
-import { appContext} from "../context/AppContext";
+import { appContext } from "../context/AppContext";
 import LoginModal from "./LoginModal";
+import { IoSearch } from "react-icons/io5";
 
 const Navbar = () => {
   const { useCart } = useContext(appContext);
@@ -67,7 +68,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <div className="pr-8">
+        <div className="px-4">
           <div className="indicator">
             <Link to={"/cart"} className="btn btn-ghost">
               <span className="indicator-item badge badge-sm badge-primary">
@@ -75,6 +76,22 @@ const Navbar = () => {
               </span>
               {<GiShoppingCart size={25} />}
             </Link>
+          </div>
+        </div>
+        <div className="dropdown dropdown-center">
+          <div tabIndex={0} role="button" className="btn btn-circle btn-ghost m-1">
+            <IoSearch size={20}/>
+          </div>
+          <div
+            tabIndex={0}
+            className="dropdown-content card card-sm bg-base-100 z-1 w-64 shadow-md"
+          >
+            <div className="card-body">
+              <label className="input">
+                <IoSearch size={20}/>
+                <input type="search" required placeholder="Search" />
+              </label>
+            </div>
           </div>
         </div>
         <ThemeSelector />
