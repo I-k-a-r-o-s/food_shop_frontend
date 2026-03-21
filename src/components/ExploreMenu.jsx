@@ -7,7 +7,6 @@ const ExploreMenu = ({ category, setCategory }) => {
     { menu_name: "fruit", menu_image: reactImg },
     { menu_name: "sandwitch", menu_image: reactImg },
   ];
-  console.log(category);
   return (
     <div className=" bg-base-200">
       <h1 className="mb-5 text-5xl font-bold">Explore the Menu!</h1>
