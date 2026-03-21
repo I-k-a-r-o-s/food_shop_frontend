@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
 import Register from "./pages/Register";
 import Footer from "./components/Footer";
+import PlaceOrder from "./pages/PlaceOrder";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/order" element={<PlaceOrder />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/register" element={<Register />} />
