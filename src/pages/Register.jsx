@@ -23,7 +23,7 @@ const Register = () => {
   };
 
   return (
-    <div className="hero min-h-[calc(100vh-4rem)] bg-base-100">
+    <div className="hero bg-base-200">
       <div className="hero-content text-center">
         {/* keep layout width controlled so the hero positioning is preserved */}
         <form className="w-full max-w-md" onSubmit={handleSubmit}>
