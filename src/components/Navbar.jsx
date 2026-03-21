@@ -12,7 +12,7 @@ import LoginModal from "./LoginModal";
 import { IoSearch } from "react-icons/io5";
 
 const Navbar = () => {
-  const { useCart } = useContext(appContext);
+  const { itemCount } = useContext(appContext);
   const [currentPage, setCurrentPage] = useState("");
 
   const navLinks = [
@@ -37,7 +37,7 @@ const Navbar = () => {
         </Link>
       </li>
     ));
-  const { totalItems } = useCart();
+  console.log(itemCount)
   return (
     <div className="navbar fixed top-0 left-0 right-0 z-50 bg-base-100 bg-opacity-95 shadow-sm backdrop-blur-sm">
       <div className="navbar-start">
@@ -72,7 +72,7 @@ const Navbar = () => {
           <div className="indicator">
             <Link to={"/cart"} className="btn btn-ghost">
               <span className="indicator-item badge badge-sm badge-primary">
-                {totalItems > 0 ? totalItems : "Empty"}
+                {itemCount > 0 ? itemCount : "Empty"}
               </span>
               {<GiShoppingCart size={25} />}
             </Link>
