@@ -43,7 +43,7 @@ const FoodCard = ({ food }) => {
           <div className="flex gap-2">
             {!cartItems[food._id] ? (
               <button
-                className="btn   btn-sm"
+                className="btn btn-sm"
                 onClick={() => addToCart(food._id)}
               >
                 <LiaPlusCircleSolid size={20} />
