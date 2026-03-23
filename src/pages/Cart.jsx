@@ -9,7 +9,8 @@ const Cart = () => {
     removeFromCart,
     currency,
     getTotalCartAmount,
-    deliveryFee,navigate
+    deliveryFee,
+    navigate,
   } = useContext(appContext);
 
   return (
@@ -100,7 +101,12 @@ const Cart = () => {
                 </div>
               </td>
               <td>
-                <button className="btn btn-primary" onClick={()=>navigate("/order")}>Checkout</button>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => navigate("/order")}
+                >
+                  Checkout
+                </button>
               </td>
             </tr>
           </tfoot>
