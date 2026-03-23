@@ -8,7 +8,7 @@ const ExploreMenu = ({ category, setCategory }) => {
     { menu_name: "sandwitch", menu_image: reactImg },
   ];
   return (
-    <div className=" bg-base-200">
+    <div className=" bg-base-200" id="menu">
       <h1 className="mb-5 text-5xl font-bold">Explore the Menu!</h1>
       <p className="mb-5">
         Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
