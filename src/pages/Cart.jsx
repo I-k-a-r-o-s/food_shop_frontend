@@ -80,10 +80,13 @@ const Cart = () => {
                 {currency} {getTotalCartAmount()}
               </td>
               <td>
-                {currency} {deliveryFee}
+                {currency} {getTotalCartAmount() === 0 ? 0 : deliveryFee}
               </td>
               <td>
-                {currency} {getTotalCartAmount() + deliveryFee}
+                {currency}{" "}
+                {getTotalCartAmount() === 0
+                  ? 0
+                  : getTotalCartAmount() + deliveryFee}
               </td>
             </tr>
             <tr>
@@ -103,6 +106,7 @@ const Cart = () => {
               <td>
                 <button
                   className="btn btn-primary"
+                  disabled={getTotalCartAmount()===0}
                   onClick={() => navigate("/order")}
                 >
                   Checkout
