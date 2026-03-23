@@ -82,10 +82,13 @@ const PlaceOrder = () => {
                   {currency} {getTotalCartAmount()}
                 </td>
                 <td>
-                  {currency} {deliveryFee}
+                  {currency} {getTotalCartAmount() === 0 ? 0 : deliveryFee}
                 </td>
                 <td>
-                  {currency} {getTotalCartAmount() + deliveryFee}
+                  {currency}{" "}
+                  {getTotalCartAmount() === 0
+                    ? 0
+                    : getTotalCartAmount() + deliveryFee}
                 </td>
               </tr>
             </tbody>
