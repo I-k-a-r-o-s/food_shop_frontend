@@ -12,6 +12,7 @@ const LoginModal = () => {
     email: "",
     password: "",
   });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
@@ -24,33 +25,44 @@ const LoginModal = () => {
       setLoading(false);
     }
   };
+
   return (
     <div>
-      {/* Open the modal using document.getElementById('ID').showModal() method */}
       <button
-        className="btn"
+        className="btn btn-primary btn-sm sm:btn-md"
         onClick={() => document.getElementById("login_modal").showModal()}
       >
         Login
       </button>
 
       <dialog id="login_modal" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box w-full max-w-md bg-base-200">
-          <h3 className="font-bold text-lg text-center">
-            Please Login to Continue.
-          </h3>
+        <div className="modal-box w-full max-w-md rounded-3xl border border-base-300/60 bg-base-100 p-6 shadow-2xl sm:p-8">
+          <button
+            className="btn btn-circle btn-ghost btn-sm absolute right-3 top-3"
+            onClick={() => document.getElementById("login_modal").close()}
+            aria-label="Close login modal"
+            type="button"
+          >
+            ✕
+          </button>
 
-          {/* Center form and allow it to take full width */}
-          <div className="mt-6 flex items-center flex-col">
+          <div className="text-center">
+            <h3 className="text-2xl font-bold">Please Login to Continue.</h3>
+            <p className="mt-2 text-sm opacity-70">
+              Sign in to manage your cart and place orders faster.
+            </p>
+          </div>
+
+          <div className="mt-6">
             <form onSubmit={handleSubmit} className="w-full">
-              <fieldset className="w-full space-y-4">
-                <div className="space-y-1">
-                  <label className="label">
-                    <span className="label-text">Email</span>
+              <fieldset className="space-y-4">
+                <div className="space-y-1 text-left">
+                  <label className="label px-0 pb-1 pt-0">
+                    <span className="label-text font-medium">Email</span>
                   </label>
                   <input
                     type="email"
-                    className="input input-bordered w-full validator"
+                    className="input input-bordered w-full rounded-2xl"
                     placeholder="Email"
                     value={formData.email}
                     onChange={(e) =>
@@ -62,14 +74,14 @@ const LoginModal = () => {
                   />
                 </div>
 
-                <div className="space-y-1">
-                  <label className="label">
-                    <span className="label-text">Password</span>
+                <div className="space-y-1 text-left">
+                  <label className="label px-0 pb-1 pt-0">
+                    <span className="label-text font-medium">Password</span>
                   </label>
                   <div className="relative">
                     <input
                       type={showPassword ? "text" : "password"}
-                      className="input input-bordered w-full validator pr-10"
+                      className="input input-bordered w-full rounded-2xl pr-12"
                       placeholder="Password"
                       value={formData.password}
                       onChange={(e) =>
@@ -82,15 +94,18 @@ const LoginModal = () => {
                     <button
                       type="button"
                       title={showPassword ? "Hide password" : "Show password"}
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 pr-2 hover:cursor-pointer"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      className="absolute inset-y-0 right-0 flex items-center rounded-r-2xl px-3 text-base-content/60 hover:text-base-content"
                     >
                       {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
                     </button>
                   </div>
                 </div>
 
-                <button className="btn btn-primary w-full mt-2" type="submit">
+                <button
+                  className="btn btn-primary w-full rounded-2xl"
+                  type="submit"
+                >
                   {loading ? (
                     <span className="loading loading-ring loading-lg"></span>
                   ) : (
@@ -102,24 +117,18 @@ const LoginModal = () => {
                 </button>
               </fieldset>
             </form>
-          </div>
 
-          <div className="modal-action">
-            <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                ✕
-              </button>
+            <div className="mt-4 flex items-center justify-center gap-2 whitespace-nowrap text-sm">
+              <span className="opacity-70">Don't have an account?</span>
               <Link
-                to={"/register"}
+                to="/register"
                 onClick={() => document.getElementById("login_modal").close()}
+                className="inline-flex items-center gap-2 rounded-full bg-base-200 px-3 py-2 font-medium transition hover:bg-base-300"
               >
-                <span className="btn btn-ghost">
-                  <TbUserPlus />
-                  Create New Account
-                </span>
+                <TbUserPlus />
+                Create New Account
               </Link>
-            </form>
+            </div>
           </div>
         </div>
       </dialog>
