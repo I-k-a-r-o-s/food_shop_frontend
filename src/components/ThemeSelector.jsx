@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { IoColorPaletteOutline } from "react-icons/io5";
 
 const ThemeSelector = () => {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "retro");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
-  const themeList = ["retro", "light", "dark", "cupcake", "coffee"];
+  const themeList = ["light", "dark"];
 
   useEffect(() => {
     localStorage.setItem("theme", theme);

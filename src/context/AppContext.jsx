@@ -76,7 +76,7 @@ const AppContextProvider = ({ children }) => {
     getTotalCartAmount,
     deliveryFee,
     itemCount,
-    navigate
+    navigate,
   };
   return (
     <appContext.Provider value={appValues}>{children}</appContext.Provider>

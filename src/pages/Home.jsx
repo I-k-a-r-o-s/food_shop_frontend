@@ -6,7 +6,7 @@ import DisplayFood from "../components/DisplayFood";
 const Home = () => {
   const [category, setCategory] = useState("All");
   return (
-    <div>
+    <div className="space-y-0 bg-base-100">
       <Banner />
       <ExploreMenu category={category} setCategory={setCategory} />
       <DisplayFood category={category} />

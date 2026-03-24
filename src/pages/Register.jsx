@@ -23,98 +23,97 @@ const Register = () => {
   };
 
   return (
-    <div className="hero bg-base-200">
-      <div className="hero-content text-center">
-        {/* keep layout width controlled so the hero positioning is preserved */}
-        <form className="w-full max-w-md" onSubmit={handleSubmit}>
-          <div className="card bg-base-200 border border-base-300 rounded-lg shadow-sm p-6">
-            {/* header */}
-            <div className="mb-3">
-              <h2 className="text-2xl font-bold">Create an account</h2>
-              <p className="text-sm opacity-70">
+    <div className="hero min-h-[calc(100vh-4rem)] bg-base-100">
+      <div className="hero-content w-full max-w-7xl px-4 py-10">
+        <form className="w-full max-w-lg" onSubmit={handleSubmit}>
+          <div className="card border border-base-300/60 bg-base-100 p-6 shadow-2xl sm:p-8">
+            <div className="text-center">
+              <div className="badge badge-secondary badge-outline mb-3 px-4 py-3 font-medium">
+                Join now
+              </div>
+              <h2 className="text-3xl font-bold">Create an account</h2>
+              <p className="mt-2 text-sm opacity-70">
                 Register to access full features
               </p>
             </div>
 
-            {/* name */}
-            <div className="form-control mb-3 text-left">
-              <label className="label">
-                <span className="label-text">Name</span>
-              </label>
-              <input
-                name="name"
-                type="text"
-                className="input input-bordered w-full"
-                placeholder="Your full name"
-                required
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, name: e.target.value }))
-                }
-              />
-            </div>
-
-            {/* email */}
-            <div className="form-control mb-3 text-left">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                name="email"
-                type="email"
-                className="input input-bordered w-full"
-                placeholder="you@example.com"
-                required
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, email: e.target.value }))
-                }
-              />
-            </div>
-
-            {/* password with inline toggle */}
-            <div className="form-control mb-3 text-left relative">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-
-              {/* wrapper is relative so the toggle can be absolutely placed */}
-              <div className="relative">
+            <div className="mt-8 space-y-4">
+              <div className="text-left">
+                <label className="label px-0 pb-1 pt-0">
+                  <span className="label-text font-medium">Name</span>
+                </label>
                 <input
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  className="input input-bordered w-full pr-10 validator"
-                  minLength="8"
-                  placeholder="Create a strong password"
+                  name="name"
+                  type="text"
+                  className="input input-bordered w-full rounded-2xl"
+                  placeholder="Your full name"
                   required
-                  value={formData.password}
+                  value={formData.name}
                   onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      password: e.target.value,
-                    }))
+                    setFormData((prev) => ({ ...prev, name: e.target.value }))
                   }
                 />
-                <button
-                  type="button"
-                  title={showPassword ? "Hide password" : "Show password"}
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 pr-2 hover:cursor-pointer"
-                >
-                  {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
-                </button>
               </div>
 
-              <p className="text-xs opacity-60 mt-2">
-                Use at least 8 characters — mix letters and numbers for a
-                stronger password.
-              </p>
-            </div>
+              <div className="text-left">
+                <label className="label px-0 pb-1 pt-0">
+                  <span className="label-text font-medium">Email</span>
+                </label>
+                <input
+                  name="email"
+                  type="email"
+                  className="input input-bordered w-full rounded-2xl"
+                  placeholder="you@example.com"
+                  required
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, email: e.target.value }))
+                  }
+                />
+              </div>
 
-            {/* primary action */}
-            <button type="submit" className="btn btn-primary w-full">
-              Register
-            </button>
+              <div className="text-left">
+                <label className="label px-0 pb-1 pt-0">
+                  <span className="label-text font-medium">Password</span>
+                </label>
+                <div className="relative">
+                  <input
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    className="input input-bordered w-full rounded-2xl pr-12"
+                    minLength="8"
+                    placeholder="Create a strong password"
+                    required
+                    value={formData.password}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        password: e.target.value,
+                      }))
+                    }
+                  />
+                  <button
+                    type="button"
+                    title={showPassword ? "Hide password" : "Show password"}
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="absolute inset-y-0 right-0 flex items-center rounded-r-2xl px-3 text-base-content/60 hover:text-base-content"
+                  >
+                    {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                  </button>
+                </div>
+                <p className="mt-2 text-xs opacity-60">
+                  Use at least 8 characters — mix letters and numbers for a
+                  stronger password.
+                </p>
+              </div>
+
+              <button
+                type="submit"
+                className="btn btn-primary w-full rounded-2xl"
+              >
+                Register
+              </button>
+            </div>
           </div>
         </form>
       </div>

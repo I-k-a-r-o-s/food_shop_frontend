@@ -7,10 +7,14 @@ const FoodCard = ({ food }) => {
     useContext(appContext);
 
   return (
-    <div className="card bg-base-100 w-96 shadow-sm">
+    <div className="card w-full overflow-hidden rounded-3xl border border-base-300/60 bg-base-100 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-xl">
       <div className="hover-3d">
-        <figure className="px-5 pt-5">
-          <img src={food.image} alt={food.name} />
+        <figure className="bg-base-200 px-5 pt-5">
+          <img
+            src={food.image}
+            alt={food.name}
+            className="aspect-4/3 w-full rounded-2xl object-cover"
+          />
         </figure>
         <div></div>
         <div></div>
@@ -21,29 +25,46 @@ const FoodCard = ({ food }) => {
         <div></div>
         <div></div>
       </div>
-      <div className="card-body">
-        <div className="flex justify-between">
-          <h2 className="card-title text-2xl">{food.name}</h2>
-          <span className="text-xl">
-            {food.price} {currency}
+      <div className="card-body gap-4 p-5 sm:p-6">
+        <div className="flex items-start justify-between gap-4">
+          <h2 className="card-title text-xl capitalize sm:text-2xl">
+            {food.name}
+          </h2>
+          <span className="badge badge-primary badge-outline px-3 py-3 text-sm font-semibold">
+            {currency} {food.price}
           </span>
         </div>
-        <p>{food.description}</p>
-        <div className="card-actions justify-between">
+
+        <p className="text-sm leading-6 opacity-75">{food.description}</p>
+
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="rating rating-sm">
-            <div className="mask mask-star bg-success" aria-current=""></div>
-            <div className="mask mask-star bg-success" aria-current=""></div>
             <div
-              className="mask mask-star bg-success"
+              className="mask mask-star bg-warning"
               aria-current="true"
             ></div>
-            <div className="mask mask-star bg-success" aria-current=""></div>
-            <div className="mask mask-star bg-success" aria-current=""></div>
+            <div
+              className="mask mask-star bg-warning"
+              aria-current="true"
+            ></div>
+            <div
+              className="mask mask-star bg-warning"
+              aria-current="true"
+            ></div>
+            <div
+              className="mask mask-star bg-warning"
+              aria-current="true"
+            ></div>
+            <div
+              className="mask mask-star bg-warning"
+              aria-current="true"
+            ></div>
           </div>
-          <div className="flex gap-2">
+
+          <div className="flex items-center gap-2">
             {!cartItems[food._id] ? (
               <button
-                className="btn btn-sm"
+                className="btn btn-primary btn-sm rounded-full px-4"
                 onClick={() => addToCart(food._id)}
               >
                 <LiaPlusCircleSolid size={20} />
@@ -52,15 +73,19 @@ const FoodCard = ({ food }) => {
             ) : (
               <>
                 <button
-                  className="btn btn-circle  btn-sm"
+                  className="btn btn-circle btn-sm btn-outline"
                   onClick={() => removeFromCart(food._id)}
+                  aria-label={`Decrease ${food.name}`}
                 >
                   <LiaMinusCircleSolid size={20} />
                 </button>
-                <label className="label font-bold">{cartItems[food._id]}</label>
+                <span className="min-w-8 text-center text-sm font-bold">
+                  {cartItems[food._id]}
+                </span>
                 <button
-                  className="btn btn-circle  btn-sm"
+                  className="btn btn-circle btn-sm btn-primary"
                   onClick={() => addToCart(food._id)}
+                  aria-label={`Increase ${food.name}`}
                 >
                   <LiaPlusCircleSolid size={20} />
                 </button>
