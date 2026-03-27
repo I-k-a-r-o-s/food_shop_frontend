@@ -1,17 +1,27 @@
 import { AiOutlineHome } from "react-icons/ai";
 import { BiFoodMenu } from "react-icons/bi";
 import { GiChefToque, GiShoppingCart } from "react-icons/gi";
-import { GrMenu } from "react-icons/gr";
-import { LuPhoneCall } from "react-icons/lu";
+import { GrLogout, GrMenu } from "react-icons/gr";
+import { LuPhoneCall, LuShoppingBag } from "react-icons/lu";
 import { Link } from "react-router";
 import ThemeSelector from "./ThemeSelector";
 import { useContext } from "react";
 import { appContext } from "../context/AppContext";
 import LoginModal from "./LoginModal";
 import { IoSearch } from "react-icons/io5";
+import { FaRegUser } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
-  const { itemCount } = useContext(appContext);
+  const { itemCount, token, setToken, navigate, location } =
+    useContext(appContext);
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    setToken("");
+    navigate("/");
+    toast.success("Logged Out Successsfully!");
+  };
 
   return (
     <div className="navbar fixed top-0 left-0 right-0 z-50 bg-base-100 bg-opacity-95 shadow-sm backdrop-blur-sm">
@@ -29,16 +39,22 @@ const Navbar = () => {
                 <AiOutlineHome size={20} /> Home
               </Link>
             </li>
-            <li>
-              <a href="#menu">
-                <BiFoodMenu size={20} /> Menu
-              </a>
-            </li>
-            <li>
-              <a href="#footer">
-                <LuPhoneCall size={20} /> Contact Us
-              </a>
-            </li>
+            {location.pathname === "/" ? (
+              <>
+                <li>
+                  <a href="#menu">
+                    <BiFoodMenu size={20} /> Menu
+                  </a>
+                </li>
+                <li>
+                  <a href="#footer">
+                    <LuPhoneCall size={20} /> Contact Us
+                  </a>
+                </li>
+              </>
+            ) : (
+              <></>
+            )}
           </ul>
         </div>
         <Link to={"/"} className="group">
@@ -58,16 +74,22 @@ const Navbar = () => {
               <AiOutlineHome size={20} /> Home
             </Link>
           </li>
-          <li>
-            <a href="#menu">
-              <BiFoodMenu size={20} /> Menu
-            </a>
-          </li>
-          <li>
-            <a href="#footer">
-              <LuPhoneCall size={20} /> Contact Us
-            </a>
-          </li>
+          {location.pathname === "/" ? (
+            <>
+              <li>
+                <a href="#menu">
+                  <BiFoodMenu size={20} /> Menu
+                </a>
+              </li>
+              <li>
+                <a href="#footer">
+                  <LuPhoneCall size={20} /> Contact Us
+                </a>
+              </li>
+            </>
+          ) : (
+            <></>
+          )}
         </ul>
       </div>
       <div className="navbar-end">
@@ -102,7 +124,41 @@ const Navbar = () => {
           </div>
         </div>
         <ThemeSelector />
-        <LoginModal />
+        {!token ? (
+          <LoginModal />
+        ) : (
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <FaRegUser size={20} />
+            </div>
+
+            <ul
+              tabIndex={-1}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
+            >
+              <li>
+                <a className="justify-between">
+                  Orders
+                  <span className="badge">
+                    <LuShoppingBag size={20} />
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a className="justify-between" onClick={logOut}>
+                  Logout
+                  <span className="badge">
+                    <GrLogout size={20} />
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
