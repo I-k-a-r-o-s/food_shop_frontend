@@ -1,24 +1,43 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { appContext } from "../context/AppContext";
+import { GiArchiveRegister } from "react-icons/gi";
 
 const Register = () => {
-  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
+  const {
+    api,
+    loading,
+    setLoading,
+    setToken,
+    navigate,
+    showPassword,
+    setShowPassword,
+  } = useContext(appContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(formData);
-      toast.success("Registered! Please Login");
-      //navigate to home
+      setLoading(true);
+      const response = await api.post("/api/user/register", formData);
+      if (response.data.success) {
+        setToken(response.data.token); //get the token and save it to token variable
+        localStorage.setItem("token", response.data.token); //save token on localstorage
+        navigate("/");
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.message);
+      }
     } catch (error) {
-      toast.error("Error!");
-      console.log("Error", error);
+      toast.error("Internal Server Error!");
+      console.log("Error in handleSubmit(Register.jsx)", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -111,7 +130,14 @@ const Register = () => {
                 type="submit"
                 className="btn btn-primary w-full rounded-2xl"
               >
-                Register
+                {loading ? (
+                  <span className="loading loading-ring loading-lg"></span>
+                ) : (
+                  <>
+                    Register
+                    <GiArchiveRegister size={20} />
+                  </>
+                )}
               </button>
             </div>
           </div>

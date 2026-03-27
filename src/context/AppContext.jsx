@@ -1,13 +1,23 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router";
+import axios from "axios";
 
 export const appContext = createContext();
 
 const AppContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState({});
   const [itemCount, setItemCount] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [token, setToken] = useState("");
 
   const navigate = useNavigate();
+
+  const api = axios.create({
+    baseURL: import.meta.env.VITE_BASE_URL,
+    //withCredentials: true,
+  });
 
   const foodList = [
     {
@@ -77,6 +87,13 @@ const AppContextProvider = ({ children }) => {
     deliveryFee,
     itemCount,
     navigate,
+    api,
+    loading,
+    setLoading,
+    token,
+    setToken,
+    showPassword,
+    setShowPassword,
   };
   return (
     <appContext.Provider value={appValues}>{children}</appContext.Provider>

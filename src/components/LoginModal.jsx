@@ -1,26 +1,44 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { LuLogIn } from "react-icons/lu";
 import { TbUserPlus } from "react-icons/tb";
 import { Link } from "react-router";
+import { appContext } from "../context/AppContext";
 
 const LoginModal = () => {
-  const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  const handleSubmit = (e) => {
+  const {
+    api,
+    loading,
+    setLoading,
+    setToken,
+    navigate,
+    showPassword,
+    setShowPassword,
+  } = useContext(appContext);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
-      console.log(formData);
-      toast.success("Login Successfull!");
+      const response = await api.post("/api/user/login", formData);
+      if (response.data.success) {
+        setToken(response.data.token); //get the token and save it to token variable
+        localStorage.setItem("token", response.data.token); //save token on localstorage
+        document.getElementById("login_modal").close();
+        navigate("/");
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.message);
+      }
     } catch (error) {
       console.log("Error in handleSubmit:", error);
+      toast.error("Internal Server Error!");
     } finally {
       setLoading(false);
     }
