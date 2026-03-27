@@ -1,8 +1,15 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { appContext } from "../context/AppContext";
 
 const PlaceOrder = () => {
-  const { getTotalCartAmount, currency, deliveryFee } = useContext(appContext);
+  const { getTotalCartAmount, currency, deliveryFee, navigate } =
+    useContext(appContext);
+
+  useEffect(() => {
+    if (getTotalCartAmount() === 0) {
+      navigate("/");
+    }
+  }, [getTotalCartAmount(), navigate]);
   return (
     <form action="">
       <div className="bg-base-100 py-12 lg:py-16">
