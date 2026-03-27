@@ -1,5 +1,5 @@
-import { createContext, useState } from "react";
-import { useNavigate } from "react-router";
+import { createContext, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
 
 export const appContext = createContext();
@@ -13,6 +13,7 @@ const AppContextProvider = ({ children }) => {
   const [token, setToken] = useState("");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const api = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL,
@@ -76,6 +77,11 @@ const AppContextProvider = ({ children }) => {
     return totalAmount;
   };
 
+  useEffect(()=>{
+    if(localStorage.getItem("token")){
+      setToken(localStorage.getItem("token"))
+    }
+  },[])
   const appValues = {
     foodList,
     currency,
@@ -94,6 +100,7 @@ const AppContextProvider = ({ children }) => {
     setToken,
     showPassword,
     setShowPassword,
+    location,
   };
   return (
     <appContext.Provider value={appValues}>{children}</appContext.Provider>
