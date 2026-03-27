@@ -82,6 +82,7 @@ const LoginModal = () => {
                     type="email"
                     className="input input-bordered w-full rounded-2xl"
                     placeholder="Email"
+                    required
                     value={formData.email}
                     onChange={(e) =>
                       setFormData((prev) => ({
@@ -101,6 +102,7 @@ const LoginModal = () => {
                       type={showPassword ? "text" : "password"}
                       className="input input-bordered w-full rounded-2xl pr-12"
                       placeholder="Password"
+                      required
                       value={formData.password}
                       onChange={(e) =>
                         setFormData((prev) => ({
