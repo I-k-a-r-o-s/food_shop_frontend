@@ -9,6 +9,7 @@ const AppContextProvider = ({ children }) => {
   const [itemCount, setItemCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  //const [foodList, setFoodList] = useState([]);
 
   const [token, setToken] = useState("");
 
@@ -53,18 +54,36 @@ const AppContextProvider = ({ children }) => {
   const currency = "LKR";
   const deliveryFee = 5;
 
-  const addToCart = (itemId) => {
+  const addToCart = async (itemId) => {
     if (!cartItems[itemId]) {
       setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
     } else {
       setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
     }
+    if (token) {
+      await api.post("/api/cart/add", { itemId }, { headers: { token } });
+    }
     setItemCount((prev) => prev + 1);
   };
 
-  const removeFromCart = (itemId) => {
+  const removeFromCart = async (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+    if (token) {
+      await api.post("/api/cart/remove", { itemId }, { headers: { token } });
+    }
     setItemCount((prev) => prev - 1);
+  };
+
+  const loadCartData = async (token) => {
+    const response = await api.get("/api/cart/get", { headers: { token } });
+    setCartItems(response.data.cartData);
+
+    // Calculate and update item count
+    let count = 0;
+    for (let itemId in response.data.cartData) {
+      count += response.data.cartData[itemId];
+    }
+    setItemCount(count);
   };
 
   const getTotalCartAmount = () => {
@@ -77,11 +96,29 @@ const AppContextProvider = ({ children }) => {
     return totalAmount;
   };
 
-  useEffect(()=>{
-    if(localStorage.getItem("token")){
-      setToken(localStorage.getItem("token"))
+  {
+    /**const fetchFood = async () => {
+    const response = await api.get("/api/food/list");
+    setFoodList(response.data.data);
+  };
+
+  const loadData = async () => {
+    await fetchFood();
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+      loadCartData(localStorage.getItem("token"))
     }
-  },[])
+  }; */
+  }
+
+  useEffect(() => {
+    //loadData();
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+      loadCartData(localStorage.getItem("token"));
+    }
+  }, []);
+
   const appValues = {
     foodList,
     currency,
